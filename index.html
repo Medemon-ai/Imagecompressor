@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Core -->
+  <title>無料画像圧縮ツール｜JPG・PNG・WEBP対応｜完全ブラウザ処理</title>
+  <meta name="description" content="完全無料のオンライン画像圧縮ツール。JPG・PNG・WEBPに対応。画像はすべてブラウザ内で処理され、サーバーへのアップロードは一切なし。プライバシー完全保護で安心して使える高画質画像圧縮サービスです。">
+  <meta name="keywords" content="画像圧縮,無料画像圧縮,オンライン画像圧縮,JPG圧縮,PNG圧縮,WEBP圧縮,高画質画像圧縮,画像サイズ縮小,ブラウザ画像圧縮">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="ImagePack JP">
+  <link rel="canonical" href="https://jp.easypdfcompress.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jp.easypdfcompress.com/">
+  <meta property="og:title" content="無料画像圧縮ツール｜JPG・PNG・WEBP対応｜完全ブラウザ処理">
+  <meta property="og:description" content="完全無料のオンライン画像圧縮ツール。画像はすべてブラウザ内で処理され、サーバーへのアップロードは一切ありません。プライバシー完全保護。">
+  <meta property="og:image" content="https://jp.easypdfcompress.com/og-image.png">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="ImagePack JP">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://jp.easypdfcompress.com/">
+  <meta name="twitter:title" content="無料画像圧縮ツール｜JPG・PNG・WEBP対応">
+  <meta name="twitter:description" content="完全無料・完全ブラウザ処理の画像圧縮ツール。JPG・PNG・WEBPに対応。プライバシー完全保護。">
+  <meta name="twitter:image" content="https://jp.easypdfcompress.com/og-image.png">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ImagePack JP – 無料画像圧縮ツール",
+    "url": "https://jp.easypdfcompress.com/",
+    "description": "JPG・PNG・WEBP形式の画像をブラウザ内で圧縮できる無料ツール。サーバーへのアップロードなし。プライバシー完全保護。",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "JPY"
+    },
+    "featureList": [
+      "JPG画像圧縮",
+      "PNG画像圧縮",
+      "WEBP画像圧縮",
+      "ブラウザ内処理",
+      "プライバシー保護",
+      "無料使用"
+    ],
+    "inLanguage": "ja"
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* =============================================
+       DESIGN TOKENS
+    ============================================= */
+    :root {
+      --bg-base:       #0C0C0F;
+      --bg-surface:    #141418;
+      --bg-raised:     #1C1C24;
+      --bg-overlay:    #222230;
+      --border:        #2A2A38;
+      --border-bright: #3A3A52;
+
+      --accent:        #6C63FF;
+      --accent-dim:    #3D3878;
+      --accent-glow:   rgba(108,99,255,0.18);
+      --accent-light:  #9B94FF;
+
+      --success:       #34D399;
+      --success-dim:   rgba(52,211,153,0.12);
+      --warning:       #FBBF24;
+      --error:         #F87171;
+
+      --text-primary:  #F0F0F8;
+      --text-secondary:#B0B0CC;
+      --text-muted:    #7070A0;
+      --text-faint:    #484868;
+
+      --radius-sm:     8px;
+      --radius-md:     14px;
+      --radius-lg:     20px;
+      --radius-xl:     28px;
+
+      --shadow-card:   0 4px 24px rgba(0,0,0,0.4);
+      --shadow-glow:   0 0 40px rgba(108,99,255,0.15);
+
+      --font-main: 'Noto Sans JP', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: var(--accent-light); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* =============================================
+       LAYOUT UTILITIES
+    ============================================= */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    .section--tight {
+      padding: 40px 0;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 900;
+      color: var(--text-primary);
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .section-sub {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 560px;
+    }
+
+    /* =============================================
+       HEADER / NAV
+    ============================================= */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(12,12,15,0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 900;
+      font-size: 17px;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, var(--accent), #A78BFA);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      transition: color 0.2s, background 0.2s;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+      background: var(--bg-raised);
+    }
+
+    .nav-badge {
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--success-dim);
+      color: var(--success);
+      border: 1px solid rgba(52,211,153,0.25);
+      padding: 2px 7px;
+      border-radius: 20px;
+      margin-left: 4px;
+    }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      padding: 48px 0 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
+      background: radial-gradient(ellipse at center, rgba(108,99,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-bright);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .hero-eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 6vw, 52px);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent), #A78BFA, var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(14px, 2vw, 16px);
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 24px;
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .trust-icon {
+      color: var(--success);
+      font-size: 14px;
+    }
+
+    /* =============================================
+       MAIN TOOL
+    ============================================= */
+    .tool-section {
+      padding: 0 0 52px;
+    }
+
+    .tool-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    /* Mode Selector */
+    .mode-bar {
+      display: flex;
+      gap: 0;
+      padding: 14px 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mode-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 10px 8px 12px;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      color: var(--text-muted);
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+      position: relative;
+      text-align: center;
+    }
+
+    .mode-btn:hover {
+      color: var(--text-secondary);
+      background: var(--bg-raised);
+    }
+
+    .mode-btn.active {
+      color: var(--text-primary);
+      background: var(--bg-raised);
+    }
+
+    .mode-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 12px;
+      right: 12px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px 2px 0 0;
+    }
+
+    .mode-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-top: 2px;
+    }
+
+    .mode-tag--recommend {
+      background: rgba(108,99,255,0.2);
+      color: var(--accent-light);
+    }
+
+    .mode-tag--quality {
+      background: rgba(52,211,153,0.15);
+      color: var(--success);
+    }
+
+    .mode-tag--max {
+      background: rgba(251,191,36,0.15);
+      color: var(--warning);
+    }
+
+    /* Drop Zone */
+    .tool-body {
+      padding: 20px;
+    }
+
+    .drop-zone {
+      border: 2px dashed var(--border-bright);
+      border-radius: var(--radius-lg);
+      padding: 32px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-base);
+    }
+
+    .drop-zone::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(108,99,255,0.06) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .drop-zone:hover,
+    .drop-zone.drag-over {
+      border-color: var(--accent);
+      background: rgba(108,99,255,0.04);
+    }
+
+    .drop-zone:hover::before,
+    .drop-zone.drag-over::before {
+      opacity: 1;
+    }
+
+    .drop-zone.drag-over {
+      transform: scale(1.01);
+      box-shadow: 0 0 0 4px var(--accent-glow);
+    }
+
+    .drop-zone.processing {
+      border-color: var(--accent);
+      pointer-events: none;
+    }
+
+    .drop-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--bg-raised);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 22px;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .drop-zone:hover .drop-icon,
+    .drop-zone.drag-over .drop-icon {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .drop-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .drop-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .drop-formats {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .format-pill {
+      font-size: 11px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      padding: 3px 9px;
+      border-radius: 5px;
+      background: var(--bg-overlay);
+      border: 1px solid var(--border-bright);
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+    }
+
+    #file-input {
+      display: none;
+    }
+
+    /* Processing overlay */
+    .processing-overlay {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .processing-overlay.visible {
+      display: flex;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .processing-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Results */
+    .results-panel {
+      display: none;
+      margin-top: 16px;
+    }
+
+    .results-panel.visible {
+      display: block;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .stat-card {
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .stat-value.success {
+      color: var(--success);
+    }
+
+    .stat-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Compression bar */
+    .compression-bar-wrap {
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+
+    .bar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .bar-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .bar-pct {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--success);
+    }
+
+    .bar-track {
+      height: 8px;
+      background: var(--bg-overlay);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--success));
+      border-radius: 4px;
+      transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+      width: 0%;
+    }
+
+    /* Preview row */
+    .preview-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .preview-box {
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .preview-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .preview-img-wrap {
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: repeating-conic-gradient(#1C1C24 0% 25%, #141418 0% 50%) 0 0 / 12px 12px;
+    }
+
+    .preview-img-wrap img {
+      max-width: 100%;
+      max-height: 130px;
+      object-fit: contain;
+    }
+
+    /* Action row */
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .btn-download {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 13px 20px;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-download:hover {
+      background: #5A53E8;
+      transform: translateY(-1px);
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .btn-reset {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--bg-raised);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 13px 16px;
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-reset:hover {
+      background: var(--bg-overlay);
+      color: var(--text-primary);
+    }
+
+    /* Privacy strip */
+    .privacy-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 12px 16px;
+      background: var(--success-dim);
+      border-top: 1px solid rgba(52,211,153,0.15);
+      flex-wrap: wrap;
+    }
+
+    .privacy-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--success);
+    }
+
+    /* =============================================
+       AD PLACEHOLDER (future AdSense)
+    ============================================= */
+    .ad-unit {
+      background: var(--bg-surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-md);
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 24px 0;
+      color: var(--text-faint);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+    }
+
+    /* =============================================
+       FEATURES SECTION
+    ============================================= */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .feature-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-glow);
+      border: 1px solid var(--accent-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 7px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* =============================================
+       PRIVACY SECTION
+    ============================================= */
+    .privacy-section {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .privacy-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .privacy-visual {
+      position: relative;
+    }
+
+    .privacy-shield {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      text-align: center;
+    }
+
+    .shield-icon {
+      font-size: 56px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .shield-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--success);
+      margin-bottom: 8px;
+    }
+
+    .shield-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .privacy-list {
+      list-style: none;
+      margin-top: 24px;
+    }
+
+    .privacy-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .privacy-list li:last-child { border-bottom: none; }
+
+    .privacy-list li::before {
+      content: '✓';
+      color: var(--success);
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* =============================================
+       HOW IT WORKS
+    ============================================= */
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 36px;
+      position: relative;
+    }
+
+    .steps-row::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(16.67% + 16px);
+      right: calc(16.67% + 16px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent-dim), var(--border), var(--accent-dim));
+    }
+
+    .step {
+      text-align: center;
+      padding: 0 16px;
+    }
+
+    .step-num {
+      width: 56px;
+      height: 56px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-bright);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-family: var(--font-mono);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--accent-light);
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* =============================================
+       FAQ SECTION
+    ============================================= */
+    .faq-list {
+      margin-top: 36px;
+      max-width: 740px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .faq-q {
+      width: 100%;
+      background: var(--bg-surface);
+      border: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      transition: background 0.2s;
+    }
+
+    .faq-q:hover { background: var(--bg-raised); }
+
+    .faq-chevron {
+      color: var(--text-muted);
+      font-size: 12px;
+      transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 300px;
+    }
+
+    .faq-a-inner {
+      padding: 0 20px 18px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      background: var(--bg-surface);
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      padding: 40px 0 28px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 36px;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      line-height: 1.7;
+      max-width: 260px;
+    }
+
+    .footer-col h4 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-col ul a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul a:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-legal a {
+      font-size: 12px;
+      color: var(--text-faint);
+      text-decoration: none;
+    }
+
+    .footer-legal a:hover { color: var(--text-muted); }
+
+    /* =============================================
+       SCROLL ANIMATIONS
+    ============================================= */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    [data-reveal].revealed {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .section { padding: 44px 0; }
+
+      .results-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .results-grid .stat-card:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .preview-row {
+        grid-template-columns: 1fr;
+      }
+
+      .action-row {
+        grid-template-columns: 1fr;
+      }
+
+      .privacy-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .steps-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .steps-row::before { display: none; }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mode-bar {
+        padding: 10px 10px 0;
+        gap: 2px;
+      }
+
+      .mode-btn { font-size: 12px; padding: 9px 6px 11px; }
+
+      .stat-value { font-size: 16px; }
+
+      .hero-trust { gap: 12px; }
+    }
+
+    /* =============================================
+       REDUCED MOTION
+    ============================================= */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <nav class="nav container" aria-label="メインナビゲーション">
+      <a href="/" class="nav-logo" aria-label="ImagePack JP ホーム">
+        <div class="nav-logo-icon" aria-hidden="true">🗜</div>
+        <span>ImagePack<span style="color:var(--accent)">JP</span></span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#tool">ツール</a></li>
+        <li><a href="#features">機能</a></li>
+        <li><a href="#privacy">プライバシー</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+        <li><span class="nav-badge">✓ 完全無料</span></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-eyebrow" role="status">
+          <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+          100% ブラウザ処理 — サーバー送信なし
+        </div>
+        <h1 class="hero-title" id="hero-heading">
+          画像を<em>瞬時に圧縮</em>。<br>プライバシーは守られる。
+        </h1>
+        <p class="hero-sub">
+          JPG・PNG・WEBP対応。すべての処理はあなたのデバイス内で完結。
+          画像が外部に送られることは一切ありません。
+        </p>
+        <div class="hero-trust" role="list" aria-label="セキュリティ保証">
+          <div class="trust-item" role="listitem">
+            <span class="trust-icon" aria-hidden="true">🔒</span>
+            <span>サーバー送信ゼロ</span>
+          </div>
+          <div class="trust-item" role="listitem">
+            <span class="trust-icon" aria-hidden="true">⚡</span>
+            <span>瞬時に処理</span>
+          </div>
+          <div class="trust-item" role="listitem">
+            <span class="trust-icon" aria-hidden="true">💰</span>
+            <span>完全無料</span>
+          </div>
+          <div class="trust-item" role="listitem">
+            <span class="trust-icon" aria-hidden="true">📱</span>
+            <span>スマホ対応</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN TOOL -->
+    <section id="tool" class="tool-section" aria-labelledby="tool-heading">
+      <div class="container">
+        <h2 id="tool-heading" class="sr-only">画像圧縮ツール</h2>
+        <div class="tool-card" role="main">
+
+          <!-- Mode selector -->
+          <div class="mode-bar" role="tablist" aria-label="圧縮モード選択">
+            <button class="mode-btn" id="mode-light" role="tab" aria-selected="false" aria-controls="tool-panel" data-mode="light" onclick="setMode('light')">
+              軽量圧縮
+              <div><span class="mode-tag mode-tag--quality">高画質</span></div>
+            </button>
+            <button class="mode-btn active" id="mode-balanced" role="tab" aria-selected="true" aria-controls="tool-panel" data-mode="balanced" onclick="setMode('balanced')">
+              標準圧縮
+              <div><span class="mode-tag mode-tag--recommend">おすすめ</span></div>
+            </button>
+            <button class="mode-btn" id="mode-max" role="tab" aria-selected="false" aria-controls="tool-panel" data-mode="max" onclick="setMode('max')">
+              最大圧縮
+              <div><span class="mode-tag mode-tag--max">最小サイズ</span></div>
+            </button>
+          </div>
+
+          <div class="tool-body" id="tool-panel" role="tabpanel">
+
+            <!-- Drop zone -->
+            <div
+              class="drop-zone"
+              id="drop-zone"
+              role="button"
+              tabindex="0"
+              aria-label="画像ファイルをドロップまたはクリックしてアップロード"
+              onclick="triggerFileInput()"
+              onkeydown="if(event.key==='Enter'||event.key===' ')triggerFileInput()"
+            >
+              <!-- Normal state -->
+              <div id="drop-default">
+                <div class="drop-icon" aria-hidden="true">🖼</div>
+                <p class="drop-title">ここに画像をドロップ</p>
+                <p class="drop-sub">またはクリックしてファイルを選択</p>
+                <div class="drop-formats" role="list" aria-label="対応フォーマット">
+                  <span class="format-pill" role="listitem">JPG</span>
+                  <span class="format-pill" role="listitem">JPEG</span>
+                  <span class="format-pill" role="listitem">PNG</span>
+                  <span class="format-pill" role="listitem">WEBP</span>
+                </div>
+              </div>
+
+              <!-- Processing state -->
+              <div class="processing-overlay" id="drop-processing" aria-live="polite">
+                <div class="spinner" role="progressbar" aria-label="圧縮中"></div>
+                <p class="processing-text">圧縮中…</p>
+              </div>
+            </div>
+
+            <input
+              type="file"
+              id="file-input"
+              accept="image/jpeg,image/png,image/webp"
+              aria-hidden="true"
+            >
+
+            <!-- Results panel -->
+            <div class="results-panel" id="results-panel" aria-live="polite" aria-atomic="true">
+
+              <!-- Stats row -->
+              <div class="results-grid">
+                <div class="stat-card">
+                  <div class="stat-label">元のサイズ</div>
+                  <div class="stat-value" id="stat-original">—</div>
+                  <div class="stat-sub" id="stat-format">—</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-label">圧縮後</div>
+                  <div class="stat-value success" id="stat-compressed">—</div>
+                  <div class="stat-sub">圧縮済み</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-label">削減率</div>
+                  <div class="stat-value success" id="stat-savings">—</div>
+                  <div class="stat-sub">ファイルサイズ削減</div>
+                </div>
+              </div>
+
+              <!-- Bar -->
+              <div class="compression-bar-wrap">
+                <div class="bar-header">
+                  <span class="bar-label">圧縮の進捗</span>
+                  <span class="bar-pct" id="bar-pct">0%</span>
+                </div>
+                <div class="bar-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="bar-track">
+                  <div class="bar-fill" id="bar-fill"></div>
+                </div>
+              </div>
+
+              <!-- Preview -->
+              <div class="preview-row">
+                <div class="preview-box">
+                  <div class="preview-label">元の画像</div>
+                  <div class="preview-img-wrap">
+                    <img id="preview-original" src="" alt="元の画像プレビュー" loading="lazy">
+                  </div>
+                </div>
+                <div class="preview-box">
+                  <div class="preview-label">圧縮後</div>
+                  <div class="preview-img-wrap">
+                    <img id="preview-compressed" src="" alt="圧縮後の画像プレビュー" loading="lazy">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="action-row">
+                <a class="btn-download" id="btn-download" href="#" download aria-label="圧縮した画像をダウンロード">
+                  ⬇ 圧縮画像をダウンロード
+                </a>
+                <button class="btn-reset" onclick="resetTool()" aria-label="新しい画像を圧縮">
+                  ↩ 新しい画像
+                </button>
+              </div>
+
+            </div><!-- /results-panel -->
+
+          </div><!-- /tool-body -->
+
+          <!-- Privacy strip -->
+          <div class="privacy-strip" role="status" aria-label="プライバシー保護情報">
+            <div class="privacy-item">
+              <span aria-hidden="true">🔒</span> 画像の送信なし
+            </div>
+            <div class="privacy-item">
+              <span aria-hidden="true">💾</span> サーバー保存なし
+            </div>
+            <div class="privacy-item">
+              <span aria-hidden="true">⚡</span> ブラウザ内処理
+            </div>
+            <div class="privacy-item">
+              <span aria-hidden="true">✓</span> 完全プライバシー保護
+            </div>
+          </div>
+
+        </div><!-- /tool-card -->
+
+        <!-- Ad unit placeholder (horizontal leaderboard) -->
+        <div class="ad-unit" aria-hidden="true">広告エリア（728×90）</div>
+
+      </div><!-- /container -->
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section" aria-labelledby="features-heading">
+      <div class="container">
+        <div data-reveal>
+          <p class="section-label">機能</p>
+          <h2 class="section-title" id="features-heading">プロ品質の圧縮を、無料で。</h2>
+          <p class="section-sub">ImagePack JPは、スピード・品質・プライバシーの3点で妥協しない画像圧縮ツールです。</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card" data-reveal>
+            <div class="feature-icon" aria-hidden="true">🖼</div>
+            <h3 class="feature-title">JPG・PNG・WEBP対応</h3>
+            <p class="feature-desc">主要な画像フォーマットをすべてサポート。ウェブ用・印刷用・SNS用など、あらゆる用途の画像を圧縮できます。</p>
+          </div>
+          <div class="feature-card" data-reveal>
+            <div class="feature-icon" aria-hidden="true">⚡</div>
+            <h3 class="feature-title">瞬時に圧縮</h3>
+            <p class="feature-desc">最新のCanvas APIとWebGLを活用した高速処理。数MBの画像も数秒で圧縮完了。待ち時間なしで作業を続けられます。</p>
+          </div>
+          <div class="feature-card" data-reveal>
+            <div class="feature-icon" aria-hidden="true">🎚</div>
+            <h3 class="feature-title">3段階の圧縮モード</h3>
+            <p class="feature-desc">軽量・標準・最大の3段階から用途に合わせて選択。画質を保ちながら最適なファイルサイズを実現します。</p>
+          </div>
+          <div class="feature-card" data-reveal>
+            <div class="feature-icon" aria-hidden="true">📱</div>
+            <h3 class="feature-title">モバイル完全対応</h3>
+            <p class="feature-desc">スマートフォン・タブレット・デスクトップすべてで快適に動作。外出先でもサクサク使えます。</p>
+          </div>
+          <div class="feature-card" data-reveal>
+            <div class="feature-icon" aria-hidden="true">👁</div>
+            <h3 class="feature-title">ビフォー/アフター確認</h3>
+            <p class="feature-desc">圧縮前後の画像をその場で比較。削減率・ファイルサイズも数値で確認できるので、最適な設定が一目でわかります。</p>
+          </div>
+          <div class="feature-card" data-reveal>
+            <div class="feature-icon" aria-hidden="true">🆓</div>
+            <h3 class="feature-title">完全無料・登録不要</h3>
+            <p class="feature-desc">アカウント作成不要・メールアドレス不要。ページを開いたその瞬間から、制限なく無料で使えます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ad unit placeholder (rectangle) -->
+    <div class="container">
+      <div class="ad-unit" aria-hidden="true">広告エリア（336×280）</div>
+    </div>
+
+    <!-- PRIVACY SECTION -->
+    <section id="privacy" class="section privacy-section" aria-labelledby="privacy-heading">
+      <div class="container">
+        <div class="privacy-layout">
+          <div data-reveal>
+            <p class="section-label">プライバシー</p>
+            <h2 class="section-title" id="privacy-heading">あなたの画像は、あなただけのもの。</h2>
+            <p class="section-sub" style="margin-bottom:0">ImagePack JPは、完全なプライバシー保護を設計の中心に置いています。</p>
+            <ul class="privacy-list" aria-label="プライバシー保護の詳細">
+              <li>画像ファイルはサーバーへ一切送信されません</li>
+              <li>圧縮処理はすべてあなたのブラウザ内で完結します</li>
+              <li>処理済み画像はサーバーに保存されません</li>
+              <li>個人情報・画像データのログ収集はありません</li>
+              <li>インターネット接続なしでも動作します（オフライン対応）</li>
+              <li>第三者へのデータ共有は一切行いません</li>
+            </ul>
+          </div>
+          <div class="privacy-visual" data-reveal>
+            <div class="privacy-shield">
+              <span class="shield-icon" aria-hidden="true">🛡️</span>
+              <p class="shield-title">100% ブラウザ内処理</p>
+              <p class="shield-sub">
+                Canvas APIを使用した完全クライアントサイド処理。<br>
+                画像データが外部に出ることは、技術的にありえません。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="section" aria-labelledby="how-heading">
+      <div class="container">
+        <div data-reveal>
+          <p class="section-label">使い方</p>
+          <h2 class="section-title" id="how-heading">3ステップで完了</h2>
+          <p class="section-sub">複雑な操作は一切不要。だれでも直感的に使えます。</p>
+        </div>
+
+        <div class="steps-row" role="list" aria-label="使用手順">
+          <div class="step" role="listitem" data-reveal>
+            <div class="step-num" aria-label="ステップ1">1</div>
+            <h3 class="step-title">画像を選択</h3>
+            <p class="step-desc">ドラッグ&ドロップ、またはクリックしてJPG・PNG・WEBP画像を選択します。スマホのカメラロールからも選択可能です。</p>
+          </div>
+          <div class="step" role="listitem" data-reveal>
+            <div class="step-num" aria-label="ステップ2">2</div>
+            <h3 class="step-title">モードを選ぶ</h3>
+            <p class="step-desc">軽量・標準・最大の3つの圧縮モードから用途に合ったものを選択。ブラウザが即座に圧縮を開始します。</p>
+          </div>
+          <div class="step" role="listitem" data-reveal>
+            <div class="step-num" aria-label="ステップ3">3</div>
+            <h3 class="step-title">ダウンロード</h3>
+            <p class="step-desc">圧縮前後を比較して確認したら、「ダウンロード」ボタンをクリック。端末に直接保存されます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section" aria-labelledby="faq-heading">
+      <div class="container">
+        <div data-reveal>
+          <p class="section-label">よくある質問</p>
+          <h2 class="section-title" id="faq-heading">FAQ</h2>
+        </div>
+
+        <div class="faq-list" data-reveal>
+
+          <div class="faq-item" itemscope itemtype="https://schema.org/Question">
+            <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+              <span itemprop="name">本当に無料ですか？登録は必要ですか？</span>
+              <span class="faq-chevron" aria-hidden="true">▼</span>
+            </button>
+            <div class="faq-a" role="region">
+              <div class="faq-a-inner" itemscope itemtype="https://schema.org/Answer">
+                <span itemprop="text">はい、完全に無料でご利用いただけます。アカウント登録・メールアドレス・クレジットカードは一切不要です。ページを開いた瞬間から、制限なくすべての機能をお使いいただけます。</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" itemscope itemtype="https://schema.org/Question">
+            <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+              <span itemprop="name">画像はサーバーに送られますか？</span>
+              <span class="faq-chevron" aria-hidden="true">▼</span>
+            </button>
+            <div class="faq-a" role="region">
+              <div class="faq-a-inner" itemscope itemtype="https://schema.org/Answer">
+                <span itemprop="text">送られません。すべての処理はブラウザ（Canvas API）内で完結しており、画像データが外部サーバーに送信されることは技術的にありえません。インターネット接続がなくても動作します。</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" itemscope itemtype="https://schema.org/Question">
+            <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+              <span itemprop="name">どのファイル形式に対応していますか？</span>
+              <span class="faq-chevron" aria-hidden="true">▼</span>
+            </button>
+            <div class="faq-a" role="region">
+              <div class="faq-a-inner" itemscope itemtype="https://schema.org/Answer">
+                <span itemprop="text">JPG（JPEG）、PNG、WEBPの3形式に対応しています。スマートフォンで撮影した写真（JPG）、透過が必要なロゴ（PNG）、ウェブ用の次世代フォーマット（WEBP）など、主要な画像フォーマットをすべてカバーしています。</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" itemscope itemtype="https://schema.org/Question">
+            <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+              <span itemprop="name">圧縮モードの違いは何ですか？</span>
+              <span class="faq-chevron" aria-hidden="true">▼</span>
+            </button>
+            <div class="faq-a" role="region">
+              <div class="faq-a-inner" itemscope itemtype="https://schema.org/Answer">
+                <span itemprop="text">軽量圧縮は画質を最優先し、サイズを少し削減します。印刷物やポートフォリオ向けです。標準圧縮はウェブ・SNS・メール添付など一般用途に最適なバランス設定です。最大圧縮はサイズを最小化し、ウェブパフォーマンスを最大化したい場合に使います。</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" itemscope itemtype="https://schema.org/Question">
+            <button class="faq-q" onclick="toggleFaq(this)" aria-extended="false">
+              <span itemprop="name">ファイルサイズの上限はありますか？</span>
+              <span class="faq-chevron" aria-hidden="true">▼</span>
+            </button>
+            <div class="faq-a" role="region">
+              <div class="faq-a-inner" itemscope itemtype="https://schema.org/Answer">
+                <span itemprop="text">制限はありませんが、ご利用のデバイスのメモリによって処理できる最大サイズが決まります。一般的なスマートフォン・PCであれば20MB以上の画像も問題なく処理できます。</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" itemscope itemtype="https://schema.org/Question">
+            <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+              <span itemprop="name">スマートフォンでも使えますか？</span>
+              <span class="faq-chevron" aria-hidden="true">▼</span>
+            </button>
+            <div class="faq-a" role="region">
+              <div class="faq-a-inner" itemscope itemtype="https://schema.org/Answer">
+                <span itemprop="text">はい、iOS（Safari）・Android（Chrome）を含むすべてのモダンブラウザで動作します。スマートフォンのカメラロールから直接画像を選択して圧縮できます。</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /faq-list -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-logo" style="display:inline-flex" aria-label="ImagePack JP ホーム">
+            <div class="nav-logo-icon" aria-hidden="true">🗜</div>
+            <span>ImagePack<span style="color:var(--accent)">JP</span></span>
+          </a>
+          <p>完全無料・完全ブラウザ処理の画像圧縮ツール。プライバシーを守りながら、高品質な圧縮を提供します。</p>
+        </div>
+        <div class="footer-col">
+          <h4>ツール</h4>
+          <ul>
+            <li><a href="#tool">画像圧縮</a></li>
+            <li><a href="#tool">JPG圧縮</a></li>
+            <li><a href="#tool">PNG圧縮</a></li>
+            <li><a href="#tool">WEBP圧縮</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>情報</h4>
+          <ul>
+            <li><a href="#features">機能一覧</a></li>
+            <li><a href="#privacy">プライバシーポリシー</a></li>
+            <li><a href="#faq">よくある質問</a></li>
+            <li><a href="#how">使い方</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 ImagePack JP. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#privacy">プライバシーポリシー</a>
+          <a href="#">利用規約</a>
+          <a href="#">お問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Visually hidden utility class -->
+  <style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
+
+  <!-- =============================================
+       JAVASCRIPT
+  ============================================= -->
+  <script>
+    // ─── STATE ─────────────────────────────────────────────────────────────────
+    let currentMode = 'balanced';
+    let compressedBlob = null;
+    let originalFileName = '';
+
+    const QUALITY_MAP = {
+      light:    { quality: 0.88, maxDim: 0,    label: '軽量圧縮' },
+      balanced: { quality: 0.72, maxDim: 0,    label: '標準圧縮' },
+      max:      { quality: 0.45, maxDim: 2400, label: '最大圧縮' }
+    };
+
+    // ─── MODE SELECTION ────────────────────────────────────────────────────────
+    function setMode(mode) {
+      currentMode = mode;
+      document.querySelectorAll('.mode-btn').forEach(btn => {
+        const isActive = btn.dataset.mode === mode;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive);
+      });
+    }
+
+    // ─── FILE INPUT TRIGGER ────────────────────────────────────────────────────
+    function triggerFileInput() {
+      document.getElementById('file-input').click();
+    }
+
+    // ─── DRAG & DROP ───────────────────────────────────────────────────────────
+    const dropZone = document.getElementById('drop-zone');
+
+    dropZone.addEventListener('dragover', e => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+
+    dropZone.addEventListener('dragleave', e => {
+      if (!dropZone.contains(e.relatedTarget)) {
+        dropZone.classList.remove('drag-over');
+      }
+    });
+
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (file) handleFile(file);
+    });
+
+    document.getElementById('file-input').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) handleFile(file);
+    });
+
+    // ─── MAIN HANDLER ──────────────────────────────────────────────────────────
+    function handleFile(file) {
+      const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+      if (!validTypes.includes(file.type)) {
+        alert('対応フォーマット: JPG、PNG、WEBPのみアップロード可能です。');
+        return;
+      }
+
+      originalFileName = file.name;
+      const originalSize = file.size;
+
+      // Show processing state
+      showProcessing(true);
+
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        const img = new Image();
+        img.onload = function() {
+          // Show original preview
+          document.getElementById('preview-original').src = ev.target.result;
+
+          // Compress
+          setTimeout(() => {
+            compressImage(img, file.type, originalSize, file.name);
+          }, 60); // tiny delay so spinner renders
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // ─── COMPRESS ─────────────────────────────────────────────────────────────
+    function compressImage(img, mimeType, originalSize, fileName) {
+      const config = QUALITY_MAP[currentMode];
+      const canvas = document.createElement('canvas');
+
+      let w = img.naturalWidth;
+      let h = img.naturalHeight;
+
+      // Optional downscale for max mode
+      if (config.maxDim > 0 && (w > config.maxDim || h > config.maxDim)) {
+        const ratio = Math.min(config.maxDim / w, config.maxDim / h);
+        w = Math.round(w * ratio);
+        h = Math.round(h * ratio);
+      }
+
+      canvas.width  = w;
+      canvas.height = h;
+
+      const ctx = canvas.getContext('2d');
+
+      // White background for JPGs (PNG with alpha → white if converting)
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(img, 0, 0, w, h);
+
+      // Use JPEG for max compression of JPEGs (WEBP if original is WEBP)
+      let outputMime = mimeType;
+      if (mimeType === 'image/png' && currentMode === 'max') {
+        // Keep PNG lossless, just apply dimension limits
+        outputMime = 'image/png';
+      }
+
+      canvas.toBlob(blob => {
+        if (!blob) {
+          alert('圧縮に失敗しました。別の画像をお試しください。');
+          showProcessing(false);
+          return;
+        }
+
+        compressedBlob = blob;
+        const compressedUrl = URL.createObjectURL(blob);
+
+        // Update previews
+        document.getElementById('preview-compressed').src = compressedUrl;
+
+        // Stats
+        const savings = ((originalSize - blob.size) / originalSize * 100);
+        const safeSavings = Math.max(0, savings);
+
+        document.getElementById('stat-original').textContent   = formatBytes(originalSize);
+        document.getElementById('stat-compressed').textContent = formatBytes(blob.size);
+        document.getElementById('stat-savings').textContent    = safeSavings.toFixed(1) + '%';
+        document.getElementById('stat-format').textContent     = getExt(fileName).toUpperCase();
+
+        // Bar
+        const pct = Math.round(safeSavings);
+        document.getElementById('bar-pct').textContent = pct + '%';
+        document.getElementById('bar-fill').style.width = pct + '%';
+        document.getElementById('bar-track').setAttribute('aria-valuenow', pct);
+
+        // Download link
+        const dlBtn = document.getElementById('btn-download');
+        dlBtn.href = compressedUrl;
+        const newName = addSuffix(fileName, '_compressed');
+        dlBtn.download = newName;
+
+        showProcessing(false);
+        showResults(true);
+
+        // Scroll to results on mobile
+        if (window.innerWidth < 768) {
+          document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+      }, outputMime, config.quality);
+    }
+
+    // ─── UI STATE HELPERS ──────────────────────────────────────────────────────
+    function showProcessing(show) {
+      const def  = document.getElementById('drop-default');
+      const proc = document.getElementById('drop-processing');
+      if (show) {
+        def.style.display  = 'none';
+        proc.classList.add('visible');
+        dropZone.classList.add('processing');
+      } else {
+        def.style.display  = 'block';
+        proc.classList.remove('visible');
+        dropZone.classList.remove('processing');
+      }
+    }
+
+    function showResults(show) {
+      document.getElementById('results-panel').classList.toggle('visible', show);
+    }
+
+    function resetTool() {
+      showResults(false);
+      compressedBlob = null;
+      document.getElementById('file-input').value = '';
+      document.getElementById('bar-fill').style.width = '0%';
+      document.getElementById('preview-original').src = '';
+      document.getElementById('preview-compressed').src = '';
+      window.scrollTo({ top: document.getElementById('tool').offsetTop - 70, behavior: 'smooth' });
+    }
+
+    // ─── FORMAT HELPERS ────────────────────────────────────────────────────────
+    function formatBytes(bytes) {
+      if (bytes < 1024)       return bytes + ' B';
+      if (bytes < 1048576)    return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    function getExt(name) {
+      return name.split('.').pop() || 'img';
+    }
+
+    function addSuffix(name, suffix) {
+      const dot = name.lastIndexOf('.');
+      if (dot < 0) return name + suffix;
+      return name.slice(0, dot) + suffix + name.slice(dot);
+    }
+
+    // ─── FAQ ACCORDION ─────────────────────────────────────────────────────────
+    function toggleFaq(btn) {
+      const item    = btn.closest('.faq-item');
+      const isOpen  = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    // ─── SCROLL REVEAL ─────────────────────────────────────────────────────────
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+
+    // ─── MODE AUTO-TRIGGER ON CHANGE (if image loaded) ─────────────────────────
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // If there's already a loaded image, recompress
+        const origImg = document.getElementById('preview-original');
+        if (origImg.src && origImg.src !== window.location.href) {
+          const fileInput = document.getElementById('file-input');
+          if (fileInput.files && fileInput.files[0]) {
+            showProcessing(true);
+            showResults(false);
+            setTimeout(() => handleFile(fileInput.files[0]), 60);
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
